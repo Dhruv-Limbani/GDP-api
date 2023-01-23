@@ -21,7 +21,7 @@ with open('model','rb') as f:
 df = pd.read_csv('Prototype.csv')
 
 @app.get('/predict')
-def predict(symptoms: list[] = Query(...)):
+def predict(symptoms: list = Query(...)):
     sym_indices = [np.where(sym_attrs==sym)[0][0] for sym in symptoms]
     x = np.zeros(len(sym_attrs))
     for idx in sym_indices:
@@ -30,7 +30,7 @@ def predict(symptoms: list[] = Query(...)):
     return diseases[pred]
 
 @app.get('/get_lksyms')
-def get_likely_symptoms(sym_list: list[str] = Query(...)):
+def get_likely_symptoms(sym_list: list = Query(...)):
     syms = []
     for sym in sym_list:
         sl = {}
